@@ -56,9 +56,7 @@ def list_maker(request):
             except TypeError:
 
                 pass
-        print(restaurants)
-        print(len(restaurants))
-        print(str(postcode))
+        
         return render(request, 'result.html', {"restaurants": restaurants})
     else:
         return render(request, 'home.html')
