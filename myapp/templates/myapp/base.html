@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Deliverooulette</title>
+    <link rel="stylesheet" type="text/css"
+        href = "{% static "/css/style.css"%}">
+        <link rel="stylesheet" type="text/css"
+        href = "{% static "/css/togglebutton.css"%}">
+</head>
+
+<body>
+    <div class = "Cuisine-Asker">
+        <form method="POST" action="{% url 'form' %}">{% csrf_token %}
+            <p>Do you want to pick between cuisines?</p>            
+            <label class = "switch">
+                <input type = "checkbox" onclick="setcheckbox()">
+                <span class = "slider round"></span>
+            </label>
+    </div>
+    <div id="content", name="content">
+    {% block content %}
+
+    {% endblock %}
+    </div>
+</body>
+</html>

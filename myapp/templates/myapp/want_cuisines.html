@@ -1,0 +1,30 @@
+{% extends "myapp/base.html" %}
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<div class="Cuisine-Choices">
+    <form method="POST" action="{% url 'form' %}">{% csrf_token %}
+        <input type="checkbox" name="cuisines[]" value = "1"/>
+        <input type="checkbox" name="cuisines[]" value = "2"/>
+        <input type="checkbox" name="cuisines[]" value = "3"/>
+        <input type="checkbox" name="cuisines[]" value = "4"/> <br>
+        <input type="checkbox" name="cuisines[]" value = "5"/>
+        <input type="checkbox" name="cuisines[]" value = "6"/>
+        <input type="checkbox" name="cuisines[]" value = "7"/>
+        <input type="checkbox" name="cuisines[]" value = "8"/><br>
+        <input type="checkbox" name="cuisines[]" value = "9"/>
+        <input type="checkbox" name="cuisines[]" value = "10"/>
+        <input type="checkbox" name="cuisines[]" value = "11"/>
+        <input type="checkbox" name="cuisines[]" value = "12"/><br>
+        <input type="checkbox" name="cuisines[]" value = "13"/>
+        <input type="checkbox" name="cuisines[]" value = "14"/>
+        <input type="checkbox" name="cuisines[]" value = "15"/>
+        <input type="checkbox" name="cuisines[]" value = "16"/><br>
+        <input type="checkbox" name="cuisines[]" value = "17"/>
+        <input type="checkbox" name="cuisines[]" value = "18"/>
+        <input type="checkbox" name="cuisines[]" value = "19"/>
+        <input type="checkbox" name="cuisines[]" value = "20"/><br>
+        <input type="checkbox" name="cuisines[]" value = "21"/>
+        <input type="checkbox" name="cuisines[]" value = "22"/>
+        <input type="submit" name="submit">
+{% endblock %}

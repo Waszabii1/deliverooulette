@@ -1,8 +1,11 @@
 from django import forms
 
+class CuisineAsker(forms.Form):
+    check = forms.BooleanField(required=False)
+
 class Postcode(forms.Form):
-    PostCode = forms.CharField(label="Postcode", max_length=8)
+    postcode = forms.CharField(label="Please enter a valid postcode", max_length=8,)
     
     
-class Cuisine_Picker(forms.Form):
-    Check = forms.BooleanField()
+class CuisinePicker(forms.Form):
+    cuisines = forms.BooleanField()
