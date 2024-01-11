@@ -1,10 +1,31 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
 <div class = "container">
 <h1> Restaurant: </h1>
-<ul>
-{% for key, val in restaurants.items %}
-    {{ key }} : {{ val }}
-  
-  
-{% endfor %}
-</ul>
+{{ restaurant }} <br> </br>
+<form action={{url}}>
+    <input type = "submit" class = "link" value = "Take me there!">
+</form>
+<br></br>
+<form method = "POST" action="{% url "reroll" %}">{% csrf_token %}
+    <button type ="submit" class="reroll">Reroll Restaurant
+    </button>
+</form>
+<br></br>
+<form  method="POST"action="{% url "clear_cuisine" %}">
+    {% csrf_token %}
+    <button type ="submit" class="clear_cuisine">Clear Cuisine Choices
+    </button>
+</form>
+<br></br>
+<form  method="POST"action="{% url "home" %}">
+    {% csrf_token %}
+    <button type ="submit" class="Home">Home
+    </button>
+</form>
+<br></br>
+<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
 </div>
+{% endblock %}

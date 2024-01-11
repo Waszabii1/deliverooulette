@@ -1,0 +1,21 @@
+{% extends "myapp/base.html" %}
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<div class ="Postcode-Sumitter">
+    <form method="POST" action="{% url 'rand_rest' %}">{% csrf_token %}
+        <p>Please enter your postcode</p>
+        <input type="text" name="Postcode" maxlength="8" placeholder = "SW1A 2AA" placeholder_color = required>
+        <input type="submit" name="submit">
+    </form>
+    <form  method="POST"action="{% url "home" %}">
+        {% csrf_token %}
+        <button type ="submit" class="Home">Home
+        </button>
+    </form>
+    <form  method="POST"action="{% url "clear_cuisine" %}">
+        {% csrf_token %}
+        <button type ="submit" class="clear_cuisine">Clear Cuisine Choices
+        </button>
+    </form>
+{% endblock %}

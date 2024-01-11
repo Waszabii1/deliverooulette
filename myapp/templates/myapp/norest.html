@@ -1,0 +1,14 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<h1> No restraurants available in your area on deliveroo</h1>
+<h2> Check your cuisine choices or if deliveroo is available in your area</h2>
+<h3>https://deliveroo.co.uk/restaurants/london/westminster?postcode={{postcode}}&collection=all-restaurants</h3>
+<br></br>
+<form  method="POST"action="{% url "home" %}">
+    {% csrf_token %}
+    <button type ="submit" class="Home">Home
+    </button>
+</form>
+{% endblock %}

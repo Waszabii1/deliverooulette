@@ -8,4 +8,4 @@ class Postcode(forms.Form):
     
     
 class CuisinePicker(forms.Form):
-    cuisines = forms.BooleanField()
+    cuisines = forms.BooleanField(required=False)

@@ -1,0 +1,23 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<div class = "container">
+<h1>Only available restaurant so hopefully you like it!</h1>
+<h1> Restaurant: </h1>
+{{ restaurant }} <br> </br>
+{{ url}}
+
+<form method = "POST" action="{% url "reroll" %}">{% csrf_token %}
+    <button tpye ="submit" class="reroll">Reroll Restaurant
+    </button>
+</form>
+<br></br>
+<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+</div>
+<form  method="POST"action="{% url "home" %}">
+    {% csrf_token %}
+    <button type ="submit" class="Home">Home
+    </button>
+</form>
+{% endblock %}
