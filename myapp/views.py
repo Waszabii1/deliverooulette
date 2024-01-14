@@ -25,7 +25,7 @@ def cuisine_asker(request):
     if request.method == "POST":
         cuisines = ["Afternoon tea","All day breakfast","American",
                     "Asian", "Asian Fusion","Breakfast","British", 
-                    "Brunch", "Café", "Chinese","Drinks", "French","Healthy", 
+                    "Brunch", "Café", "Chinese", "French","Healthy", 
                     "Indian", "Italian", "Japanese", "Korean", 
                     "Lebanese", "Mediterranean", "Middle Eastern", "Thai", "Turkish"]
         return render(request, "want_cuisines.html", {"cuisines": cuisines})
@@ -47,7 +47,6 @@ def list_maker(request):
     if request.method == "POST": #gets postcode, generates lists of restaurants
         postcode = request.POST.get("Postcode")
         cuisine_choices = request.session["cuisine_choices"]
-        print(cuisine_choices)
         url_groceries = f'https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}&cuisine=grocery&collection=all-restaurants' #generates a list of grocery shops to remove
         result_groc = requests.get(url_groceries)
         doc_groc = BeautifulSoup(result_groc.text, "html.parser")
@@ -69,7 +68,6 @@ def list_maker(request):
             
                
         url_main = f'https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}{cuisine_choices}&collection=all-restaurants' #generates a list of all restaurants
-        print(url_main)
         result_main = requests.get(url_main)
         doc_main = BeautifulSoup(result_main.text, "html.parser")
         tags_main = doc_main.find_all("a")
@@ -116,8 +114,9 @@ def re_roll(request):
     if request.method == "POST":
         postcode = request.session["postcode"]
         amount = len(restaurants)
+        no_rest_url = f"https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}&collection=all-restaurants"
         if amount == 0:
-            return render(request, "norest.html", {"postcode":postcode})
+            return render(request, "norest.html", {"url":no_rest_url})
         rest = key, val = random.choice(list(restaurants.items()))
         output_rest = f"Out of {amount} restaurants, the random restaurant for {postcode} is {key}"
         output_url = f"https://deliveroo.co.uk{val}"

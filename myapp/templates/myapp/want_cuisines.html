@@ -6,20 +6,28 @@
     <form method="POST" action="{% url 'cuisine_choices_func' %}">
         {% csrf_token %}
         {% for cuisine in cuisines %}
-        <input type= "checkbox" value = "{{cuisine}}" name = "my_cuisine_list[]">
+        <input type= "checkbox" id = "checkbox" value = "{{cuisine}}" name = "my_cuisine_list[]">
         {{cuisine}}
+        {% if forloop.counter|divisibleby:3 %}
+            <br> </br>
+        {% endif %}
         {% endfor %}
-    <br></br>
-    <button type ="submit" value = "submit" >Submit choices</button>
+    <button type ="submit" value = "submit" id="Submit">Submit choices</button>
     </form>
-</br>
-</br>
-<input type=button value="I don't want to pick between cuisines anymore" onClick="javascript:history.go(-1);">
+</div>
+<div>
+<form  method="POST"action="{% url "home" %}">
+        {% csrf_token %}
+        <button type ="submit" class="Home" id="Submit">I don't want to pick between cuisines anymore
+        </button>
+</form>
+</div>
+
+<div>
 <form  method="POST"action="{% url "home" %}">
     {% csrf_token %}
-    <button type ="submit" class="Home">Home
+    <button type ="submit" class="Home" id="Submit">Home
     </button>
 </form>
-
 </div>
 {% endblock %}

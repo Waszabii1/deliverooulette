@@ -4,20 +4,22 @@
 {% load static %}
 <div class = "container">
 <h1>Only available restaurant so hopefully you like it!</h1>
-<h1> Restaurant: </h1>
-{{ restaurant }} <br> </br>
-{{ url}}
-
-<form method = "POST" action="{% url "reroll" %}">{% csrf_token %}
-    <button tpye ="submit" class="reroll">Reroll Restaurant
+<h2> {{ restaurant }} </h2>
+<br> </br>
+<form action={{url}}>
+    <input type = "submit" class = "link" id="Submit" value = "Take me there!">
+</form>
+<div>
+<input type=button class = "Prev-Rest-Submit" id="Submit" value="Previous Restaurant" onClick="javascript:history.go(-1);">
+</div>
+<form  method="POST"action="{% url "clear_cuisine" %}">
+    {% csrf_token %}
+    <button type ="submit" id="Submit" class="Clear-Cuisine-Submit">Clear Cuisine Choices
     </button>
 </form>
-<br></br>
-<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
-</div>
 <form  method="POST"action="{% url "home" %}">
     {% csrf_token %}
-    <button type ="submit" class="Home">Home
+    <button type ="submit" id="Submit" class="Home-Submit">Home
     </button>
 </form>
 {% endblock %}
