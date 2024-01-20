@@ -12,6 +12,7 @@ import random
 restaurants = {}
 groceries = {}
 postcode = ""
+global cuisine_choices
 cuisine_choices = ""
 
 def home(response): 
@@ -36,6 +37,7 @@ def cuisine_asker(request):
 def cuisine_choices_func(request):
     if request.method == "POST":
         cuisine_choicess = (request.POST.getlist("my_cuisine_list[]"))
+        cuisine_choices = ""
         for i in cuisine_choicess:
             i = str(i).lower().replace(" ","+")
             cuisine_choices += f"&cuisine={i}"
