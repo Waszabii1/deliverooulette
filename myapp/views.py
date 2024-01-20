@@ -20,8 +20,7 @@ def home(response):
     return render(response, "home.html")
 
 def clear_cuisine(request):
-    cuisine_choices = request.session["cuisine_choices"]
-    cuisine_choices = ""
+    cuisine_choices = request.session.pop["cuisine_choices"]
     return render(request, "home.html")
 
 def cuisine_asker(request):
@@ -37,7 +36,7 @@ def cuisine_asker(request):
         return render(request, 'home.html')
 
 def cuisine_choices_func(request):
-    cuisine_choices = request.session["cuisine_choices"]
+    cuisine_choices = request.session.get("cuisine_choices")
     if request.method == "POST":
         cuisine_choicess = (request.POST.getlist("my_cuisine_list[]"))
         for i in cuisine_choicess:
@@ -52,7 +51,7 @@ def list_maker(request):
         result_groc = requests.get(url_groceries)
         doc_groc = BeautifulSoup(result_groc.text, "html.parser")
         tags_groc = doc_groc.find_all("a")
-        cuisine_choices = request.session["cuisine_choices"]
+        cuisine_choices = request.session.get("cuisine_choices")
 
         for tag in range(5, (len(tags_groc) -28)):  # removes Nones and Social Medias, gets list of groceries
 
