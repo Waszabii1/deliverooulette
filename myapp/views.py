@@ -12,6 +12,7 @@ import random
 restaurants = {}
 groceries = {}
 postcode = ""
+cuisine_choices = ""
 
 def home(response): 
     return render(response, "home.html")
@@ -40,13 +41,11 @@ def cuisine_choices_func(request):
         for i in cuisine_choicess:
             i = str(i).lower().replace(" ","+")
             cuisine_choices += f"&cuisine={i}"
-        request.session["cuisine_choices"] = cuisine_choices
         return render(request, "cuisines_chosen.html")
 
 def list_maker(request):
     if request.method == "POST": #gets postcode, generates lists of restaurants
         postcode = request.POST.get("Postcode")
-        cuisine_choices = request.session["cuisine_choices"]
         url_groceries = f'https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}&cuisine=grocery&collection=all-restaurants' #generates a list of grocery shops to remove
         result_groc = requests.get(url_groceries)
         doc_groc = BeautifulSoup(result_groc.text, "html.parser")
