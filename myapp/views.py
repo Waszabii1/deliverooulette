@@ -19,11 +19,11 @@ request.session["cuisine_choices"] = cuisine_choices
 def home(response): 
     return render(response, "home.html")
 
-def clear_cuisine(request):
+def clear_cuisine(request, *args, **kwargs):
     cuisine_choices = request.session.pop["cuisine_choices"]
     return render(request, "home.html")
 
-def cuisine_asker(request):
+def cuisine_asker(request, *args, **kwargs):
     if request.method == "POST":
         cuisines = ["Afternoon tea","All day breakfast","American",
                     "Asian", "Asian Fusion","Breakfast","British", 
@@ -35,7 +35,7 @@ def cuisine_asker(request):
     else:
         return render(request, 'home.html')
 
-def cuisine_choices_func(request):
+def cuisine_choices_func(request, *args, **kwargs):
     cuisine_choices = request.session.get("cuisine_choices")
     if request.method == "POST":
         cuisine_choicess = (request.POST.getlist("my_cuisine_list[]"))
@@ -44,7 +44,7 @@ def cuisine_choices_func(request):
             cuisine_choices += f"&cuisine={i}"
         return render(request, "cuisines_chosen.html")
 
-def list_maker(request):
+def list_maker(request, *args, **kwargs):
     if request.method == "POST": #gets postcode, generates lists of restaurants
         postcode = request.POST.get("Postcode")
         url_groceries = f'https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}&cuisine=grocery&collection=all-restaurants' #generates a list of grocery shops to remove
@@ -111,7 +111,7 @@ def list_maker(request):
     else:
         return render(request, 'home.html')
 
-def re_roll(request):
+def re_roll(request, *args, **kwargs):
     if request.method == "POST":
         postcode = request.session["postcode"]
         amount = len(restaurants)
