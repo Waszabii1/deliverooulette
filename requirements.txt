@@ -1,3 +1,4 @@
+psycopg2-binary==2.9.9
 asgiref==3.7.2
 beautifulsoup4==4.12.2
 bs4==0.0.1
@@ -8,7 +9,6 @@ gunicorn==21.2.0
 idna==3.6
 packaging==23.2
 pillow==10.2.0
-psycopg2-binary==2.9.9
 requests==2.31.0
 soupsieve==2.5
 sqlparse==0.4.4
