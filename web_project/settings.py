@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-uckpq8-&!%=!fj_ks41j66wjpkz9e*na7xqej4ggbri4uz-#+!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-CSRF_TRUSTED_ORIGINS = ["https://deliverooulette-production.up.railway.app/"]
+CSRF_TRUSTED_ORIGINS = ["https://deliverooulette-production.up.railway.app"]
 
 WSGI_APPLICATION = 'web_project.wsgi.application'
 
