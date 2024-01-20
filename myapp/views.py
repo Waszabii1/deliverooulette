@@ -12,19 +12,16 @@ import random
 restaurants = {}
 groceries = {}
 postcode = ""
-
-
+cuisine_choices = ""
 
 def home(response): 
-    cuisine_choices = ""
-    request.session["cuisine_choices"] = cuisine_choices
     return render(response, "home.html")
 
-def clear_cuisine(request, *args, **kwargs):
-    cuisine_choices = request.session.pop["cuisine_choices"]
+def clear_cuisine(request):
+    cuisine_choices = ""  
     return render(request, "home.html")
 
-def cuisine_asker(request, *args, **kwargs):
+def cuisine_asker(request):
     if request.method == "POST":
         cuisines = ["Afternoon tea","All day breakfast","American",
                     "Asian", "Asian Fusion","Breakfast","British", 
@@ -36,23 +33,22 @@ def cuisine_asker(request, *args, **kwargs):
     else:
         return render(request, 'home.html')
 
-def cuisine_choices_func(request, *args, **kwargs):
-    cuisine_choices = request.session.get("cuisine_choices")
+def cuisine_choices_func(request):
     if request.method == "POST":
         cuisine_choicess = (request.POST.getlist("my_cuisine_list[]"))
+        cuisine_choices = ""
         for i in cuisine_choicess:
             i = str(i).lower().replace(" ","+")
             cuisine_choices += f"&cuisine={i}"
         return render(request, "cuisines_chosen.html")
 
-def list_maker(request, *args, **kwargs):
+def list_maker(request):
     if request.method == "POST": #gets postcode, generates lists of restaurants
         postcode = request.POST.get("Postcode")
         url_groceries = f'https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}&cuisine=grocery&collection=all-restaurants' #generates a list of grocery shops to remove
         result_groc = requests.get(url_groceries)
         doc_groc = BeautifulSoup(result_groc.text, "html.parser")
         tags_groc = doc_groc.find_all("a")
-        cuisine_choices = request.session.get("cuisine_choices")
 
         for tag in range(5, (len(tags_groc) -28)):  # removes Nones and Social Medias, gets list of groceries
 
@@ -112,7 +108,7 @@ def list_maker(request, *args, **kwargs):
     else:
         return render(request, 'home.html')
 
-def re_roll(request, *args, **kwargs):
+def re_roll(request):
     if request.method == "POST":
         postcode = request.session["postcode"]
         amount = len(restaurants)
