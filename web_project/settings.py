@@ -72,7 +72,8 @@ TEMPLATES = [
     },
 ]
 
-CSRF_TRUSTED_ORIGINS = ["https://deliverooulette-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://*.railway.app"
+]
 
 WSGI_APPLICATION = 'web_project.wsgi.application'
 
