@@ -19,7 +19,7 @@ def home(response):
 
 def clear_cuisine(request):
     cuisine_choices = ""  
-    return render(request, "home.html")
+    return render(request, "home.html", cuisine_choices)
 
 def cuisine_asker(request):
     if request.method == "POST":
@@ -39,7 +39,7 @@ def cuisine_choices_func(request):
         for i in cuisine_choicess:
             i = str(i).lower().replace(" ","+")
             cuisine_choices += f"&cuisine={i}"
-        return render(request, "cuisines_chosen.html")
+        return render(request, "cuisines_chosen.html", cuisine_choices)
 
 def list_maker(request):
     if request.method == "POST": #gets postcode, generates lists of restaurants
