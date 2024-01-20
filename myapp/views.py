@@ -20,7 +20,7 @@ def home(response):
 
 def clear_cuisine(request):
     cuisine_choices = ""  
-    return render(request, "home.html", cuisine_choices)
+    return render(request, "home.html",)
 
 def cuisine_asker(request):
     if request.method == "POST":
