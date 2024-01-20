@@ -12,11 +12,12 @@ import random
 restaurants = {}
 groceries = {}
 postcode = ""
-cuisine_choices = ""
-request.session["cuisine_choices"] = cuisine_choices
+
 
 
 def home(response): 
+    cuisine_choices = ""
+    request.session["cuisine_choices"] = cuisine_choices
     return render(response, "home.html")
 
 def clear_cuisine(request, *args, **kwargs):
