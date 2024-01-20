@@ -41,7 +41,7 @@ def cuisine_choices_func(request):
         for i in cuisine_choicess:
             i = str(i).lower().replace(" ","+")
             cuisine_choices += f"&cuisine={i}"
-        return render(request, "cuisines_chosen.html", cuisine_choices)
+        return render(cuisine_choices, request, "cuisines_chosen.html")
 
 def list_maker(request):
     if request.method == "POST": #gets postcode, generates lists of restaurants
