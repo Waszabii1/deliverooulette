@@ -12,15 +12,17 @@ import random
 restaurants = {}
 groceries = {}
 postcode = ""
-global cuisine_choices
 cuisine_choices = ""
+request.session["cuisine_choices"] = cuisine_choices
+
 
 def home(response): 
     return render(response, "home.html")
 
 def clear_cuisine(request):
-    cuisine_choices = ""  
-    return render(request, "home.html",)
+    cuisine_choices = request.session["cuisine_choices"]
+    cuisine_choices = ""
+    return render(request, "home.html")
 
 def cuisine_asker(request):
     if request.method == "POST":
@@ -35,9 +37,9 @@ def cuisine_asker(request):
         return render(request, 'home.html')
 
 def cuisine_choices_func(request):
+    cuisine_choices = request.session["cuisine_choices"]
     if request.method == "POST":
         cuisine_choicess = (request.POST.getlist("my_cuisine_list[]"))
-        cuisine_choices = ""
         for i in cuisine_choicess:
             i = str(i).lower().replace(" ","+")
             cuisine_choices += f"&cuisine={i}"
@@ -50,6 +52,7 @@ def list_maker(request):
         result_groc = requests.get(url_groceries)
         doc_groc = BeautifulSoup(result_groc.text, "html.parser")
         tags_groc = doc_groc.find_all("a")
+        cuisine_choices = request.session["cuisine_choices"]
 
         for tag in range(5, (len(tags_groc) -28)):  # removes Nones and Social Medias, gets list of groceries
 
