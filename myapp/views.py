@@ -172,8 +172,8 @@ def list_maker(request):
         return render(request, 'home.html')
 
 def re_roll(request):
+    restaurants = request.session["restaurants"]
     if request.method == "POST":
-        restaurants = request.session["restaurants"]
         postcode = request.session["postcode"]
         amount = len(restaurants)
         no_rest_url = f"https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}&collection=all-restaurants"
@@ -186,7 +186,6 @@ def re_roll(request):
         if amount == 1:
             return render(request, "1rest.html", {"restaurant": output_rest, "url" : output_url})
         else:
-            restaurants.pop(key, val)
             return render(request, 'result.html', {"restaurant": output_rest, "url" : output_url})
         
         
