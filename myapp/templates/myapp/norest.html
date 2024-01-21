@@ -10,5 +10,10 @@
     {% csrf_token %}
     <button type ="submit" id="Submit" class="Home-Submit">Home
     </button>
+<form  method="POST"action="{% url "clear_cuisine" %}">
+        {% csrf_token %}
+        <button type ="submit" id="Submit" class="Clear-Cuisine-Submit">Clear Cuisine Choices
+        </button>
+</form>
 </form>
 {% endblock %}
