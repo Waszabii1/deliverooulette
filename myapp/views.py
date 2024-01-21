@@ -9,8 +9,6 @@ import requests
 import random
 
 # Create your views here.
-restaurants = {}
-groceries = {}
 postcode = ""
 cuisine_choices = ""
 
@@ -43,6 +41,8 @@ def cuisine_choices_func(request):
         return render(request, "cuisines_chosen.html")
 
 def list_maker(request):
+    restaurants = {}
+    groceries = {}
     if request.method == "POST": #gets postcode, generates lists of restaurants
         postcode = request.POST.get("Postcode")
         url_groceries = f'https://deliveroo.co.uk/restaurants/london/westminster?postcode={postcode}&cuisine=grocery&collection=all-restaurants' #generates a list of grocery shops to remove
@@ -97,6 +97,7 @@ def list_maker(request):
         output_url = f"https://deliveroo.co.uk{val}"
         restaurants.pop(key, val)
         request.session["postcode"] = postcode #gives postcode to reroll function
+        request.session["restaurants"] = restaurants
         
         
         if amount == 1:
@@ -109,6 +110,7 @@ def list_maker(request):
         return render(request, 'home.html')
 
 def re_roll(request):
+    restaurants = request.session["restaurants"]
     if request.method == "POST":
         postcode = request.session["postcode"]
         amount = len(restaurants)
