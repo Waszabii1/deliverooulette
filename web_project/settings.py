@@ -73,6 +73,7 @@ TEMPLATES = [
 ]
 
 CSRF_TRUSTED_ORIGINS = ["https://*.railway.app"
+                        "https://deliverooulette.com/*"
 ]
 
 WSGI_APPLICATION = 'web_project.wsgi.application'
