@@ -8,15 +8,13 @@ import requests
 
 import random
 
-# Create your views here.
-postcode = ""
 cuisine_choices = ""
 
+# Create your views here.
 def home(response): 
     return render(response, "home.html")
 
 def clear_cuisine(request):
-    cuisine_choices = ""  
     return render(request, "home.html")
 
 def cuisine_asker(request):
@@ -89,7 +87,7 @@ def cuisine_choices_func(request):
         if amount == 0: #deals with index 0 errors and shows something if no restaurants avilable
             return render(request, "norest.html", {"postcode": postcode}) 
         rest = key, val = random.choice(list(restaurants.items()))
-        output_rest = f"Out of {amount} restaurants, the random restaurant for {postcode} is {key}"
+        output_rest_string = f"Out of {amount} restaurants, the random restaurant for"
         output_url = f"https://deliveroo.co.uk{val}"
         restaurants.pop(key, val)
         request.session["postcode"] = postcode #gives postcode to reroll function
@@ -97,9 +95,9 @@ def cuisine_choices_func(request):
         
         
         if amount == 1:
-            return render(request, "1rest.html", {"restaurant": output_rest, "url" : output_url})
+            return render(request, "1rest.html", {"string": output_rest_string, "url" : output_url, "postcode" : postcode, "restaurant" : key })
         else:
-            return render(request, 'result.html', {"restaurant": output_rest, "url" : output_url})
+            return render(request, 'result.html', {"string": output_rest_string, "url" : output_url, "postcode" : postcode, "restaurant" : key })
         
 
 def list_maker(request):
@@ -155,7 +153,7 @@ def list_maker(request):
         if amount == 0: #deals with index 0 errors and shows something if no restaurants avilable
             return render(request, "norest.html", {"postcode": postcode}) 
         rest = key, val = random.choice(list(restaurants.items()))
-        output_rest = f"Out of {amount} restaurants, the random restaurant for {postcode} is {key}"
+        output_rest_string = f"Out of {amount} restaurants, the random restaurant for"
         output_url = f"https://deliveroo.co.uk{val}"
         restaurants.pop(key, val)
         request.session["postcode"] = postcode #gives postcode to reroll function
@@ -163,9 +161,9 @@ def list_maker(request):
         
         
         if amount == 1:
-            return render(request, "1rest.html", {"restaurant": output_rest, "url" : output_url})
+            return render(request, "1rest.html", {"string": output_rest_string, "url" : output_url, "postcode" : postcode, "restaurant" : key })
         else:
-            return render(request, 'result.html', {"restaurant": output_rest, "url" : output_url})
+            return render(request, 'result.html', {"string": output_rest_string, "url" : output_url, "postcode" : postcode, "restaurant" : key })
         
         
     else:
@@ -180,14 +178,14 @@ def re_roll(request):
         if amount == 0:
             return render(request, "norest.html", {"url":no_rest_url})
         rest = key, val = random.choice(list(restaurants.items()))
-        output_rest = f"Out of {amount} restaurants, the random restaurant for {postcode} is {key}"
+        output_rest_string = f"Out of {amount} restaurants, the random restaurant for"
         output_url = f"https://deliveroo.co.uk{val}"
         restaurants.pop(key, val)
         request.session.modified = True
         if amount == 1:
-            return render(request, "1rest.html", {"restaurant": output_rest, "url" : output_url})
+            return render(request, "1rest.html", {"string": output_rest_string, "url" : output_url, "postcode" : postcode, "restaurant" : key })
         else:
-            return render(request, 'result.html', {"restaurant": output_rest, "url" : output_url})
+            return render(request, 'result.html', {"string": output_rest_string, "url" : output_url, "postcode" : postcode, "restaurant" : key })
         
         
     else:

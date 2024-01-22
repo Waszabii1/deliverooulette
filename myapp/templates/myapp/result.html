@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 {% load static %}
 <div class = "container">
-<h3> {{ restaurant }} </h3>
+<h3> {{ string }} {{ postcode | upper }} {{ restaurant }} </h3>
 <br> </br>
 <form action={{url}}>
     <input type = "submit" class = "link" id="Submit" value = "Take me there!">

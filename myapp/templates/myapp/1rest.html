@@ -4,7 +4,7 @@
 {% load static %}
 <div class = "container">
 <h1>Only available restaurant so hopefully you like it!</h1>
-<h2> {{ restaurant }} </h2>
+<h3> {{ string }} {{ postcode | upper }} {{ restaurant }} </h3>
 <br> </br>
 <form action={{url}}>
     <input type = "submit" class = "link" id="Submit" value = "Take me there!">
